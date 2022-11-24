@@ -44,7 +44,7 @@ public class CourseRepository {
         em.flush();                             //changes upto this point is sent to the database
 
 
-        em.detach(course1);                     //changes to course1 is no longer tracked by the EntityManager
+        //em.detach(course1);                     //changes to course1 is no longer tracked by the EntityManager
         //em.clear();                             //clears eveything that is being tracked by the EM
 
         course.setName("Web Services Updated"); //this also gets saved
