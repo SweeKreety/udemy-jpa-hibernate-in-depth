@@ -19,29 +19,29 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @SpringBootTest(classes = JpahibernateApplication.class)
 public class CourseRepositoryTest {
 	@Autowired
-	CourseRepository repository;
+	CourseRepository courseRepository;
 
 	@Test
 	public void findById_basicTest() {
-	Course course=	repository.findById(1001L);
+	Course course=	courseRepository.findById(1001L);
 	assertEquals("Java",course.getName());
 	}
 	@Test
 	@DirtiesContext //executes the test code but resets the data to original since the unit test should not change the original data
 	public void deleteById_basicTest() {
-		repository.deleteById(1002L);
-		assertNull(repository.findById(1002L));
+		courseRepository.deleteById(1002L);
+		assertNull(courseRepository.findById(1002L));
 	}
 	@Test
 	@DirtiesContext //executes the test code but resets the data to original since the unit test should not change the original data
 	public void save_basicTest() {
-		Course course=	repository.findById(1002L);      //getting a course
+		Course course=	courseRepository.findById(1002L);      //getting a course
 		assertEquals("Hibernate", course.getName());
 
 		course.setName("Hibernate Updated");							//updating a course
-		repository.save(course);						//saving the course
+		courseRepository.save(course);						//saving the course
 
-		Course course1= repository.findById(1002L);		//checking the value
+		Course course1= courseRepository.findById(1002L);		//checking the value
 		assertEquals("Hibernate Updated", course1.getName());
 
 	}
@@ -49,6 +49,6 @@ public class CourseRepositoryTest {
 	@Test
 	@DirtiesContext
 	public void learnAboutEntityManager(){
-		repository.learnAboutEntityManager();
+		courseRepository.learnAboutEntityManager();
 	}
 }

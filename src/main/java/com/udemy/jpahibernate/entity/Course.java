@@ -3,7 +3,13 @@ package com.udemy.jpahibernate.entity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Entity

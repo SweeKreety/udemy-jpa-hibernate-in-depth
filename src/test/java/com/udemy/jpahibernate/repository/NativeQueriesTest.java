@@ -50,7 +50,7 @@ public class NativeQueriesTest {
 	@Test
 	@Transactional
 	public void native_queries_to_update() {
-		Query query= em.createNativeQuery("Update COURSE set name= 'Swikriti' where id=1", Course.class);
+		Query query= em.createNativeQuery("Update COURSE set name= 'Cloud Computing' where id=1", Course.class);
 		int noOfRowsUpdated = query.executeUpdate();
 
 		logger.info("Number of rows updated -> {}", noOfRowsUpdated);
