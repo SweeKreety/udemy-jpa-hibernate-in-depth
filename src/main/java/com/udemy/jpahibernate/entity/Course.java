@@ -4,13 +4,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NamedQueries(
@@ -33,6 +30,13 @@ public class Course {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
+    @OneToMany(mappedBy = "course")
+    private List<Review> reviews= new ArrayList<>();
+
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students= new ArrayList<>();
+
+
     public Course() {
     }
 
@@ -48,10 +52,28 @@ public class Course {
         this.name = name;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+    public void removeReview(Review review) {
+        this.reviews.remove(review);
+    }
+
     public Long getId() {
         return id;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudents(Student student) {
+        this.students.add(student);
+    }
 
     @Override
     public String toString() {

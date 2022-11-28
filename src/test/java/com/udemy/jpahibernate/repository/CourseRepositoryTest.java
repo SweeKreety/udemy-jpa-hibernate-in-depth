@@ -2,6 +2,7 @@ package com.udemy.jpahibernate.repository;
 
 import com.udemy.jpahibernate.JpahibernateApplication;
 import com.udemy.jpahibernate.entity.Course;
+import com.udemy.jpahibernate.entity.Review;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -11,6 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -18,8 +22,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = JpahibernateApplication.class)
 public class CourseRepositoryTest {
+
+	private final Logger logger= LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	CourseRepository courseRepository;
+
+	@Autowired
+	EntityManager em;
 
 	@Test
 	public void findById_basicTest() {
@@ -50,5 +59,23 @@ public class CourseRepositoryTest {
 	@DirtiesContext
 	public void learnAboutEntityManager(){
 		courseRepository.learnAboutEntityManager();
+	}
+
+	@Test
+	@DirtiesContext
+	@Transactional
+	public void retrieveReviewsForCourse(){
+
+		Course course= courseRepository.findById(1001L);
+		logger.info("Review for course with id 1001 {}", course.getReviews());
+	}
+
+	@Test
+	@DirtiesContext
+	@Transactional
+	public void retrieveCourseForReview(){
+
+		Review review= em.find(Review.class, 5001L);
+		logger.info("Course for review with id 5001 {}", review.getCourse());
 	}
 }

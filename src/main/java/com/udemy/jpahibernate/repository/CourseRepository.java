@@ -1,6 +1,7 @@
 package com.udemy.jpahibernate.repository;
 
 import com.udemy.jpahibernate.entity.Course;
+import com.udemy.jpahibernate.entity.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.List;
+
 @Repository
 @Transactional  //if we need a change in  then transactional should be used
 public class CourseRepository {
@@ -54,4 +57,31 @@ public class CourseRepository {
 
     }
 
+    public void addHardcodedReviewsForCourse() {
+        Course course= findById(1003L);
+        logger.info("course.getReviews ->{}",course.getReviews());
+
+        Review review1= new Review("5","Awesome course");
+        Review review2= new Review("4","Stunned by it");
+
+        course.addReview(review1);  //setting relationship between course and review
+        review1.setCourse(course);
+
+        course.addReview(review1);
+        review2.setCourse(course);
+
+        em.persist(review1);   //saving to the db
+        em.persist(review2);
+    }
+
+    public void addReviewsForCourse(Long courseId, List<Review> reviews) {
+        Course course= findById(courseId);
+        logger.info("course.getReviews ->{}",course.getReviews());
+
+        for (Review review: reviews) {
+            course.addReview(review);  //setting relationship between course and review
+            review.setCourse(course);
+            em.persist(review);
+        }
+    }
 }

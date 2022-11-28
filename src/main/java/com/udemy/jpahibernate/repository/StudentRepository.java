@@ -1,5 +1,6 @@
 package com.udemy.jpahibernate.repository;
 
+import com.udemy.jpahibernate.entity.Course;
 import com.udemy.jpahibernate.entity.Passport;
 import com.udemy.jpahibernate.entity.Student;
 import org.slf4j.Logger;
@@ -43,5 +44,23 @@ public class StudentRepository {
         Student student = new Student("Nick");
         student.setPassport(passport);
         em.persist(student);
+    }
+
+    public void insertHardcodedStudentAndCourse(){
+        Student student= new Student("Jack");
+        Course course= new Course("DBA");
+        em.persist(student);
+        em.persist(course);
+        student.addCourses(course);
+        course.addStudents(student);
+        em.persist(student);
+    }
+
+    public void insertStudentAndCourse(Student student, Course course){
+        student.addCourses(course);
+        course.addStudents(student);
+
+        em.persist(student);
+        em.persist(course);
     }
 }
