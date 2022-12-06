@@ -49,4 +49,7 @@ public class JpqlTest {
 
 		logger.info("Select c From Course c where name like'% Services'-> {}", resultList);
 	}
+
+
+
 }
