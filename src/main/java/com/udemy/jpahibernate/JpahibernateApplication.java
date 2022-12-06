@@ -48,7 +48,7 @@ public class JpahibernateApplication implements CommandLineRunner {
 //		//studentRepository.insertHardcodedStudentAndCourse();
 //		studentRepository.insertStudentAndCourse(new Student("Jill"), new Course("DBA"));
 //	}
-	employeeRepository.insert(
+	/*employeeRepository.insert(
 			new FullTimeEmployee("Jack", new BigDecimal("10000")));
 
 	employeeRepository.insert(
@@ -57,6 +57,6 @@ public class JpahibernateApplication implements CommandLineRunner {
 			logger.info("All Part Time Employees-> {}", employeeRepository.retrieveAllPartTimeEmployees());
 		logger.info("All Full Time Employees-> {}", employeeRepository.retrieveAllFullTimeEmployees());
 
-
+*/
 }
 }
