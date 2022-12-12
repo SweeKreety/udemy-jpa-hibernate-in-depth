@@ -1,5 +1,6 @@
 package com.udemy.jpahibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,7 +17,7 @@ import java.util.List;
                 @NamedQuery(name="get_course_with_services", query="Select c From Course c where name like '% Services'")
         }
 )
-
+@Cacheable
 public class Course {
     @Id
     @GeneratedValue
@@ -34,6 +35,7 @@ public class Course {
     private List<Review> reviews= new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     private List<Student> students= new ArrayList<>();
 
 

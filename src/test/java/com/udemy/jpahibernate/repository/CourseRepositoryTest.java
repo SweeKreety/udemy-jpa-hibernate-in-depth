@@ -35,6 +35,19 @@ public class CourseRepositoryTest {
 	Course course=	courseRepository.findById(1001L);
 	assertEquals("Java",course.getName());
 	}
+
+	@Test
+
+	public void findById_firstLevelCacheDemo() {
+		Course course=	courseRepository.findById(1001L);
+		logger.info("First Course Retrieved {}", course);
+
+		Course course1=	courseRepository.findById(1001L);
+		logger.info("First Course Retrieved Twice{}", course1);
+
+		assertEquals("Java",course.getName());
+		assertEquals("Java",course1.getName());
+	}
 	@Test
 	@DirtiesContext //executes the test code but resets the data to original since the unit test should not change the original data
 	public void deleteById_basicTest() {
